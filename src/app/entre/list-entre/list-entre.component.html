@@ -1,0 +1,60 @@
+<mat-toolbar>
+  <div fxHide.gt-xs>
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    Liste Entre
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+
+            <button class="btn btn-sm btn-success text-white pull-right" (click)="newComm()">
+              nouveau </button>
+              <button class="btn" (click)="openPDF()" style="font-size:20px"><i class="fa fa-download"></i>PDF</button>
+    </ul>
+</div>
+</mat-toolbar>
+<!--<input type="text" [(ngModel)]="SearchText" class="form-control bg-light border-0 small"
+placeholder="Recherche..." aria-label="Search" aria-describedby="basic-addon2">-->
+<table class="table table-hover" id="htmlData">
+  <thead class="thead-light">
+    <th>id</th>
+    <th>numero</th>
+    <th>Date entre</th>
+    <th>reference entre</th>
+    <th>Fournisseur</th>
+    <th>Action</th>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let entre of entreListe  | paginate:{itemsPerPage: 6 ,currentPage: p}">
+      <td>{{entre.id}}</td>
+      <td>{{entre.numeroOperation}}</td>
+      <td>{{entre.dateOperation| date:'dd/MM/yyyy'}}</td>
+      <td>{{entre.refOperation}}</td>
+      <td>{{entre.idF}}</td>
+
+      <td>
+        <a class="btn text-danger" (click)="onDelete(entre.id)"><i class="fa fa-trash fa-lg">
+
+          </i> </a>
+       <!-- <a class="btn text-danger" (click)="onSelect(entre)"><i class="fa fa-pencil fa-lg">
+
+          </i> </a>-->
+      </td>
+    </tr>
+    <div class="row">
+      <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
+      </div>
+      <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+          <ul class="pagination"></ul>
+        </div>
+      </div>
+    </div>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
